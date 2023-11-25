@@ -1,0 +1,55 @@
+<section class="min-h-[50vh]">
+  <ng-container *ngIf="state.loading; else showWeatherOrError">
+    <div class="flex justify-center items-center p-10">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-container>
+  <ng-template #showWeatherOrError>
+    <ng-container *ngIf="state.error !== ''; else showWeather">
+      <div class="flex justify-center items-center h-20">
+        <mat-icon class="text-red-500">error</mat-icon>
+        <h3>There is some kind of error, please try again later</h3>
+      </div>
+    </ng-container>
+    <ng-template #showWeather>
+      <ng-container *ngIf="state.weatherData === ''; else showData">
+        <div class="flex justify-center items-center  h-20">
+          <mat-icon class="text-red-500">error</mat-icon>
+          <h3>There is no data to show</h3>
+        </div>
+      </ng-container>
+      <ng-template #showData>
+        <div class="flex justify-center items-center p-4 w-full overflow-auto m-2">
+          <google-map [zoom]="zoom">
+          </google-map>
+        </div>
+        <div>
+          <div class="max-w-md mx-auto bg-white shadow-md rounded p-8 m-2">
+            <h2 class="text-2xl font-semibold mb-4">{{ state.weatherData.location.name }}, {{ state.weatherData.location.country }}</h2>
+            <div class="flex items-center mb-4">
+              <img [src]="state.weatherData.current.weather_icons[0]" alt="Weather Icon" class="mr-2">
+              <p class="text-xl">{{ state.weatherData.current.weather_descriptions[0] }}</p>
+            </div>
+            <div class="grid grid-cols-1 gap-4">
+              <div>
+                <p class="text-lg mb-2">Temperature: {{ state.weatherData.current.temperature }}°C</p>
+                <p class="text-lg mb-2">Feels Like: {{ state.weatherData.current.feelslike }}°C</p>
+                <p class="text-lg mb-2">Humidity: {{ state.weatherData.current.humidity }}%</p>
+                <p class="text-lg mb-2">Wind Speed: {{ state.weatherData.current.wind_speed }} km/h</p>
+                <p class="text-lg mb-2">Wind Direction: {{ state.weatherData.current.wind_dir }}</p>
+              </div>
+              <div>
+                <p class="text-lg mb-2">Pressure: {{ state.weatherData.current.pressure }} hPa</p>
+                <p class="text-lg mb-2">Precipitation: {{ state.weatherData.current.precip }} mm</p>
+                <p class="text-lg mb-2">Cloud Cover: {{ state.weatherData.current.cloudcover }}%</p>
+                <p class="text-lg mb-2">UV Index: {{ state.weatherData.current.uv_index }}</p>
+                <p class="text-lg mb-2">Visibility: {{ state.weatherData.current.visibility }} km</p>
+              </div>
+            </div>
+            <p class="text-lg mt-4">Observation Time: {{ state.weatherData.current.observation_time }}</p>
+          </div>
+        </div>
+      </ng-template>
+    </ng-template>
+  </ng-template>
+</section>
