@@ -21,13 +21,18 @@ export class WeatherApiService {
     const weatherWebsite = `http://api.weatherstack.com/current?access_key=21303c565281d1a4fc2666cfcb1ca23e&query=` + location;
     this.http.get<WeatherApiResponse>(weatherWebsite).subscribe({
       next: (data) => {
-        this.state.loading = false;
-        this.state.weatherData = data;
-        this.state.error = '';
-        const latitude = parseFloat(data.location.lat);
-        const longitude = parseFloat(data.location.lon);
-        this.state.mapCenter = { lat: latitude, lng: longitude };
-
+        if (data.current) {
+          this.state.loading = false;
+          this.state.weatherData = data;
+          this.state.error = '';
+          const latitude = parseFloat(data.location.lat);
+          const longitude = parseFloat(data.location.lon);
+          this.state.mapCenter = { lat: latitude, lng: longitude };
+        } else {
+          this.state.loading = false;
+          this.state.weatherData = '';
+          this.state.error = 'There is nothing to show';
+        }
       },
       error: (error) => {
         console.log(error);
