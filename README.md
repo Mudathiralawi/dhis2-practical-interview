@@ -1,21 +1,12 @@
 # dhis2-practical-interview
 
-
-
-Explain your design decisions, including how you handle API requests and responses, and consider factors like error handling and user experience.
-
-
-Please upload the source code to a GitHub public repository in your account and include detailed instructions on how to execute the application. Give it the name “dhis2-practical-interview”.
-
-I can provide you with a detailed overview of the design decisions and considerations for a single-page Angular application, including how to handle API requests and responses, error handling, and user experience. However, I won't be able to directly upload files to GitHub or create repositories. Instead, I'll guide you on how to structure your Angular application and handle these aspects.
-
 ### Design Decisions:
 
 1. **Project Structure:**
-   - Organize your project using Angular best practices. Separate components, services, and modules into their respective directories.
+   - Project was organized using Angular best practices. Separate components, services, and modules into their respective directories.
 
 2. **Angular Services:**
-   - Create services to handle API requests and responses. Angular services can be injected into components to fetch data from APIs.
+   - Services was created to handle API requests and responses. Angular services can be injected into components to fetch data from APIs.
    - Use the Angular HttpClient module for making HTTP requests.
 
 3. **Observable Pattern:**
